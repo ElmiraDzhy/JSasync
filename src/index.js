@@ -18,3 +18,9 @@ p.then((response) => {
 
 
 
+const data = fetch('https://randomuser.me/api/?results=5');
+
+data.then((responce) => responce.json())
+    .then((jsData) => console.log(jsData.results))
+    .catch(error => console.log(`This is error: ${error}`))
+    .finally(() => console.log('finally!!!!'));
