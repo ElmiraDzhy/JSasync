@@ -1,15 +1,19 @@
 'use strict';
 
 
-const p = fetch('https://fakestoreapi.com/products');
+const products = fetch('https://fakestoreapi.com/products');
 
 // console.dir(p);
 
-p.then((response) => {
+products.then((response) => {
     return response.json();
     }) 
     .then((data) => {
         console.log(data);
+        const cardArray = data.map((obj) => createCard(obj));
+        console.log(cardArray);
+        const root = document.querySelector('#root');
+        root.append(...cardArray);
     })
     .catch((error) => {
         console.log('error :')
@@ -18,9 +22,44 @@ p.then((response) => {
 
 
 
-const data = fetch('https://randomuser.me/api/?results=5');
+const userData = fetch('https://randomuser.me/api/?results=5');
 
-data.then((responce) => responce.json())
+userData.then((responce) => responce.json())
     .then((jsData) => console.log(jsData.results))
     .catch(error => console.log(`This is error: ${error}`))
     .finally(() => console.log('finally!!!!'));
+
+
+
+function createCard(obj){
+
+    const img = createElem('img', {classNames: ['card-img'], attributes: [{src: obj.image}]});
+    const h3 = createElem('h3', {classNames: ['card-title']}, obj.title);
+    const p = createElem('p', {classNames: ['card-description']}, obj.description);
+    const h4 = createElem('h4', {classNames: ['card-price']}, obj.price);
+    const article = createElem('article', {classNames: ['card-container']}, img, h3, p, h4);
+
+    console.log(obj.image);
+
+    return article;
+}
+
+
+function createElem(type, {classNames, attributes}, ...children){
+
+
+    const elem = document.createElement(type);
+    if(attributes){
+        attributes.forEach((obj) => {
+            for (const key in obj) {
+                elem.setAttribute(key, obj[key]);
+            }
+        })
+       
+    }
+    elem.classList.add(...classNames);
+    elem.append(...children);
+
+
+    return elem;
+}

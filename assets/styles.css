@@ -1,0 +1,36 @@
+*{
+    box-sizing: border-box;
+}
+
+#root{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card-container{
+    width: 300px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    padding: 20px;
+    margin: 5px;
+    
+
+}
+
+.card-image{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-description{
+    height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
