@@ -33,11 +33,11 @@ userData.then((responce) => responce.json())
 
 function createCard(obj){
 
-    const img = createElem('img', {classNames: ['card-img'], attributes: [{src: obj.image}]});
+    const img = createElem('img', {classNames: ['card-image'], attributes: [{src: obj.image}]});
     const h3 = createElem('h3', {classNames: ['card-title']}, obj.title);
     const p = createElem('p', {classNames: ['card-description']}, obj.description);
-    const h4 = createElem('h4', {classNames: ['card-price']}, obj.price);
-    const article = createElem('article', {classNames: ['card-container']}, img, h3, p, h4);
+    const button = createElem('button', {classNames: ['card-price']}, 'Buy: ', obj.price, ' $');
+    const article = createElem('article', {classNames: ['card-container']}, img, h3, p, button);
 
     console.log(obj.image);
 
