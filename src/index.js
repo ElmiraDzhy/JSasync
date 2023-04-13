@@ -1,15 +1,30 @@
 'use strict';
-setTimeout(function(){
-    console.log('message from timer');
-    asyncFun();
-    setTimeout(function(){
-        console.log('message from another timer');
-        asyncFun();
-    }, 0)
-}, 1000)
 
-function asyncFun(){
-    console.log('async');
-}
 
-console.log('Sync work');
+const p = fetch('https://fakestoreapi.com/products');
+
+// console.dir(p);
+
+p.then((response) => {
+    console.log('success');
+    console.log(response); //response - обьект ответа
+
+    const jsondata = response.json();
+    jsondata.then(
+        (jsData) => {
+            console.log('i am here')
+            console.log(jsData);
+        }, 
+        
+        () => {
+            console.log('ERROR')
+        }
+    );
+
+}, (error) => {
+    console.log('error :')
+    console.log(error);
+}); //говорим что делать, когда промис изменит статус
+
+
+
