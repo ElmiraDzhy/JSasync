@@ -5,30 +5,34 @@
 
 
 
- function loadImg(src){
-    const img = document.createElement('img');
-    img.setAttribute('src', src);
+const form = document.querySelector('form');
 
-    return new Promise((res, rej) => {
-        img.addEventListener('load', (event) => {
-            res(img);
-        });
-        
-        img.addEventListener('error', () => {
-            rej('img error')
-        });
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    getWeatherData(event.target.city.value);
+});
 
-    })
+async function getWeatherData(city){
+    const API_KEY = 'b9c4be44d8633df1d1b499cd272205f0'; // subscribe
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=ua`
+    const responce = await fetch(url);
+    const data = await responce.json();
+
+   console.log(data);
+   updateWeatherCard(data);
 }
 
 
-const root = document.querySelector('#root');
-const div = document.createElement('div');
-div.classList.add('wrapper');
-root.append(div);
 
-const img = loadImg('https://i.pinimg./originals/e0/e9/f7/e0e9f7ec88289f2445827a47e7a0af79.jpg')
-    .then( (img) => div.append(img),
-            (err) => console.log(err)
-        );
 
+function updateWeatherCard(weatherObj){
+    const wrapper = document.querySelector('.weather-card');
+    wrapper.classList.add('show');
+
+    wrapper.children[0].textContent = `Погода в місті ${weatherObj.name}:`;
+    wrapper.children[1].textContent = `Температура повітря: ${weatherObj.main.temp}`;
+    wrapper.children[2].textContent= `Опис: ${weatherObj.weather[0].description}`;
+    wrapper.children[3].textContent= `Швидкість вітру: ${weatherObj.wind.speed}`;
+
+    console.log(weatherObj.main.temp)
+}
