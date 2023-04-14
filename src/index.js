@@ -1,18 +1,35 @@
 'use strict';
 
+// async function getAsyncWork(){
 
-function loadFunc(){
-    if(Math.random() > 0.5){
-        return Promise.resolve(5);
-    }
-    else{
-        return Promise.resolve(1);
-    }
+//     throw new Error();
+
+// }
+
+// const result = getAsyncWork();
+// console.log(result);
+
+async function getServerData(){
+    const p = await fetch('https://rendomuser.me/api/'); //p - response
+
+    const data = await p.json();
+
+    //sync code
+
 }
 
-const res = loadFunc();
-res.then((value) => {
-    console.log(`PROMISE VALUE: ${value}`);
-})
+function syncFunc () {
+    console.log('message from sync func');
+    console.log(1);
+    console.log(1);
+    console.log(1);
+    console.log(1);
+    console.log(1);
+    console.log(1);
+    console.log(1);
 
+}
 
+console.log(getServerData());
+
+syncFunc();
