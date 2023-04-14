@@ -1,35 +1,23 @@
 'use strict';
 
-// async function getAsyncWork(){
 
-//     throw new Error();
-
-// }
-
-// const result = getAsyncWork();
-// console.log(result);
 
 async function getServerData(){
-    const p = await fetch('https://rendomuser.me/api/'); //p - response
+    try{
+        const p = await fetch('https://randomuser.me/api/'); //p - response
 
-    const data = await p.json();
+        const data = await p.json();
+        return data;
+    }catch(errs){
+        throw new Error();
+    }
+    
 
-    //sync code
-
-}
-
-function syncFunc () {
-    console.log('message from sync func');
-    console.log(1);
-    console.log(1);
-    console.log(1);
-    console.log(1);
-    console.log(1);
-    console.log(1);
-    console.log(1);
+    
 
 }
+
+
 
 console.log(getServerData());
 
-syncFunc();
