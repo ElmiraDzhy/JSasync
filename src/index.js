@@ -1,28 +1,18 @@
 'use strict';
 
 
-
-const p = new Promise(executor);
-
-
-function executor(res, rej){
-
+function loadFunc(){
     if(Math.random() > 0.5){
-        res(true);
+        return Promise.resolve(5);
     }
-
     else{
-        rej(false);
+        return Promise.resolve(1);
     }
 }
 
-
-p.then(( ) => {
-    console.log('кіт живий');
-},
-() => {
-    console.log(`кіт не живий`);
+const res = loadFunc();
+res.then((value) => {
+    console.log(`PROMISE VALUE: ${value}`);
 })
 
 
-console.log(p)
